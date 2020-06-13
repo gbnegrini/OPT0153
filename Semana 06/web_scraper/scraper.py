@@ -8,10 +8,9 @@ import traceback
 import sys
 
 class WebScraper:
-    bs = None
 
     def __init__(self):
-        pass
+        self.soup = None
 
     def get_html(self, url):
         """Gets the url HTML content and parses it with BeautifulSoup"""
@@ -19,8 +18,9 @@ class WebScraper:
         try:
             html = urlopen(url)
             print("URL: <" + url + "> opened.")
-            self.bs = bs4.BeautifulSoup(html.read(), "html.parser")
+            self.soup = bs4.BeautifulSoup(html.read(), "html.parser")
             print("HTML parsed.")
+
         except (HTTPError, URLError) as error:
             print("Error: " + error.__str__())
             exc_type, exc_value, exc_tb = sys.exc_info()
@@ -30,7 +30,7 @@ class WebScraper:
         """Does all the magic to extract the seminars information. Returns a list of Seminar objects"""
         try:
             # Gets all <articles> tag
-            articles_list = self.bs.find_all("article")
+            articles_list = self.soup.find_all("article")
 
             seminars = []
 
