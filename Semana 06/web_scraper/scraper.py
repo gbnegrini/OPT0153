@@ -6,7 +6,6 @@ import re
 from datetime import datetime
 import traceback
 import sys
-from pprint import pprint
 
 class WebScraper:
     bs = None
@@ -22,12 +21,10 @@ class WebScraper:
             print("URL: <" + url + "> opened.")
             self.bs = bs4.BeautifulSoup(html.read(), "html.parser")
             print("HTML parsed.")
-            # print("HTML: \n" + bs.prettify())
         except (HTTPError, URLError) as error:
             print("Error: " + error.__str__())
             exc_type, exc_value, exc_tb = sys.exc_info()
             print(str(traceback.format_exception(exc_type, exc_value, exc_tb)))
-            pprint(traceback.format_exception(exc_type, exc_value, exc_tb))
 
     def get_data(self):
         """Does all the magic to extract the seminars information. Returns a list of Seminar objects"""
@@ -98,4 +95,3 @@ class WebScraper:
             print("Error: " + error.__str__())
             exc_type, exc_value, exc_tb = sys.exc_info()
             print(str(traceback.format_exception(exc_type, exc_value, exc_tb)))
-            pprint(traceback.format_exception(exc_type, exc_value, exc_tb))
