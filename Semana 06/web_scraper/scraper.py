@@ -13,18 +13,26 @@ class WebScraper:
         self.soup = None
 
     def get_html(self, url):
-        """Gets the url HTML content and parses it with BeautifulSoup"""
+        """Gets the HTML content from a given url"""
+        
         print("Getting HTML...")
         try:
             html = urlopen(url)
-            print("URL: <" + url + "> opened.")
-            self.soup = bs4.BeautifulSoup(html.read(), "html.parser")
-            print("HTML parsed.")
-
+            print("HTML from: <" + url + "> retrieved.")
+            return html
         except (HTTPError, URLError) as error:
-            print("Error: " + error.__str__())
+            print("Error while handling HTML retrieval. Check URL and internet connection.")
             exc_type, exc_value, exc_tb = sys.exc_info()
             print(str(traceback.format_exception(exc_type, exc_value, exc_tb)))
+
+    def parse_html(self, html):
+        """Parses the HTML content with BeautifulSoup."""
+        
+        print("Parsing HTML...")
+        self.soup = bs4.BeautifulSoup(html.read(), "html.parser")
+        print("HTML parsed.")
+
+       
 
     def get_data(self):
         """Does all the magic to extract the seminars information. Returns a list of Seminar objects"""
@@ -95,3 +103,10 @@ class WebScraper:
             print("Error: " + error.__str__())
             exc_type, exc_value, exc_tb = sys.exc_info()
             print(str(traceback.format_exception(exc_type, exc_value, exc_tb)))
+    
+    def print_error_information(error){
+        """Prints the error message and"""
+        print("Error: " + error.__str__())
+            exc_type, exc_value, exc_tb = sys.exc_info()
+            print(str(traceback.format_exception(exc_type, exc_value, exc_tb)))
+    }
