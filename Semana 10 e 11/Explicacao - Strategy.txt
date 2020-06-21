@@ -1,0 +1,10 @@
+Padrão escolhido: Strategy
+Strategy é um padrão do tipo comportamental definido pela Gang of Four. O principal problema resolvido pelo Strategy é quando há a necessidade de variação de algoritmos, i.e. estratégias, que atuam sobre classes de forma semelhante. Através do padrão Strategy, diferentes algoritmos são encapsulados em diferentes classes, permitindo que esses objetos sejam intercambiávies e possam variar conforme necessidade. Por exemplo, diferentes algoritmos de ordenação (Bubble Sort, Selection Sort, etc) podem ser implementados como classes específicas com a estratégia de ordenação definida em um método comum.
+
+A estrutura geral do padrão para o paradigma de Programação Orientada a Objetos geralmente é composta de:
+- Contexto: responsável por implementar uma estratégia específica. 
+- Estratégia: uma interface comum para os algoritmos implementados.
+- Estratégia Concreta: a classe que vai realmente implementar uma estratégia.
+
+O exemplo a seguir implementa o padrão Strategy na linguagem Python. 
+A aplicação desenvolvida é uma calculadora de dose anestésica para roedores. As classes Tiopental e Propofol herdam da classe abstrata Anestesico e implementam de forma concreta a estratégia de cálculo da dosagem de anestésico de acordo com o peso do animal e da concentração de anestésico. A classe DosagemAnestesica funciona como contexto, selecionando uma estratégia específica e o objeto da classe Roedor para realizar o cálculo. A execução do script (calcula_dose.py) roda o exemplo (código após __main__).
