@@ -11,10 +11,9 @@ import sys
 class WebScraper:
 
     def __init__(self):
-        self.soup = None
+        self.__soup = None
 
     def get_html(self, url):
-        """Gets the HTML content from a given url"""
 
         print("Getting HTML...")
         try:
@@ -28,14 +27,12 @@ class WebScraper:
             print(str(traceback.format_exception(exc_type, exc_value, exc_tb)))
 
     def parse_html(self, html):
-        """Parses the HTML content with BeautifulSoup."""
 
         print("Parsing HTML...")
-        self.soup = bs4.BeautifulSoup(html.read(), "html.parser")
+        self.__soup = bs4.BeautifulSoup(html.read(), "html.parser")
         print("HTML parsed.")
 
-    def format_seminar(self, article):
-        """Formats the scraped data from HTML article tag into the attributes of a Seminar object."""
+    def __format_seminar(self, article):
 
         seminar = Seminar()
         try:
@@ -84,23 +81,21 @@ class WebScraper:
             print(str(traceback.format_exception(exc_type, exc_value, exc_tb)))
             return None
 
-    def log_seminar_data(self, seminar):
-        """Prints Seminar object attributes."""
+    def __log_seminar_data(self, seminar):
 
         print("The following seminar was added to the list: ")
         for parameter in seminar.parameters():
             print(parameter)
 
     def get_seminars(self):
-        """Returns a list of Seminar objects based on HTML article tags."""
 
-        articles = self.soup.find_all("article")
+        articles = self.__soup.find_all("article")
         seminars = list()
 
         for article in articles:
-            seminar = format_seminar(article)
+            seminar = self.__format_seminar(article)
             if seminar is not None:
                 seminars.append(seminar)
-                log_seminar_data(seminar)
+                self.__log_seminar_data(seminar)
 
         return seminars
